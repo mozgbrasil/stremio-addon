@@ -4,10 +4,12 @@ const addonInterface = require('./addon');
 const { config } = require('./config');
 // console.log('config: ', config);
 const logger = require('./logger.js');
+const package_manifest = require('../package.json');
 
 //
 
-const captureMessage = '' + __filename + ' ' + config.local;
+const captureMessage =
+  '' + package_manifest.version + ' | ' + config.local + ' | ' + __filename;
 
 // console.log('process.env: ', process.env);
 
