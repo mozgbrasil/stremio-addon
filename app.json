@@ -1,0 +1,29 @@
+{
+  "name": "@mozg/stremio-addon",
+  "description": "Stremio Addon",
+  "keywords": ["app.json", "node.js", "heroku", "mozg", "brasil"],
+  "website": "http://mozg.com.br/",
+  "repository": "https://github.com/mozgbrasil/stremio-addon",
+  "logo": "http://mozg.com.br/assets/images/logos/logo.svg",
+  "success_url": "/",
+  "scripts": {
+    "postdeploy": "echo 'Yo_postdeploy';",
+    "pr-predestroy": "echo 'Yo_predestroy';"
+  },
+  "env": {
+    "SECRET_TOKEN": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    }
+  },
+  "image": "heroku/nodejs",
+  "addons": [],
+  "buildpacks": [],
+  "environments": {
+    "test": {
+      "scripts": {
+        "test": "echo 'Yo_environments';"
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@mozg/stremio-addon",
+  "version": "1.0.4",
+  "description": "Stremio with Error Monitoring and with Log Data and with TMDb Catalog pt-BR and with Extended Year Filter and with Multi Sources Streams and with ...",
+  "author": "USR <mozgbrasil@gmail.com>",
+  "homepage": "https://9b7c457c25d2-stremio-addon.baby-beamup.club/",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "start": "node src/server.js",
+    "dev-addon": "nodemon -x 'clear;node' -r dotenv/config src/server.js",
+    "dev-addon-launch": "nodemon -x 'clear;node' -r dotenv/config src/server.js --launch",
+    "beamup_set_secrets": "bash src/shell.sh beamup_set_secrets",
+    "deploying": "beamup"
+  },
+  "dependencies": {
+    "@sentry/browser": "^6.1.0",
+    "@sentry/node": "^6.1.0",
+    "@sentry/tracing": "^6.1.0",
+    "dotenv": "^8.2.0",
+    "lodash": "^4.17.20",
+    "log4js": "^6.3.0",
+    "logzio-nodejs": "^2.0.2",
+    "magnet-uri": "^6.1.0",
+    "moviedb-promise": "^3.1.6",
+    "rarbg-api-ts": "^1.0.22",
+    "stremio-addon-sdk": "^1.6.4",
+    "webtorrent-health": "^1.1.2"
+  },
+  "devDependencies": {}
+}
