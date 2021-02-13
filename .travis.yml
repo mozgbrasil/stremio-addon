@@ -12,10 +12,11 @@ before_script:
 script:
   - 'echo -e "@script"'
   - codecov # upload coverage reports to codecov.io
-after_script:
-  - 'echo -e "@after_script"'
+  - beamup # deploying to the BeamUp servers
 after_success:
   - 'echo -e "@after_success"'
+after_script:
+  - 'echo -e "@after_script"'
 notifications:
   email:
     on_success: change
