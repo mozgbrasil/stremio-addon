@@ -22,6 +22,7 @@ Soon I must add new improvements
 
 If you liked this project, consider giving a 🌟 or donating.
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/96a989dfe4d5448396baf172b2a89f99)](https://app.codacy.com/gh/mozgbrasil/stremio-addon?utm_source=github.com&utm_medium=referral&utm_content=mozgbrasil/stremio-addon&utm_campaign=Badge_Grade)
 - [![pagseguro](https://stc.pagseguro.uol.com.br/public/img/botoes/doacoes/164x37-doar-assina.gif)](https://pagseguro.uol.com.br/checkout/v2/donation.html?currency=BRL&receiverEmail=mozgbrasil@gmail.com)
 - [![Star on GitHub](https://img.shields.io/github/stars/mozgbrasil/stremio-addon.svg?style=social)](https://github.com/mozgbrasil/stremio-addon/stargazers)
 - [![Watch on GitHub](https://img.shields.io/github/watchers/mozgbrasil/stremio-addon.svg?style=social)](https://github.com/mozgbrasil/stremio-addon/watchers)
