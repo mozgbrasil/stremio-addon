@@ -1,0 +1,18 @@
+# env:
+#   global:
+#     - CODECOV_TOKEN="todo" # https://codecov.io
+language: node_js
+node_js:
+  - 12
+install: npm install
+before_script:
+  - npm install -g codecov
+script:
+  - npm start # see package.json scripts or gruntfile.js
+  - codecov # upload coverage reports to codecov.io
+after_script:
+  - - 'echo -e "@after_script"'
+notifications:
+  email:
+    on_success: change
+    on_failure: always

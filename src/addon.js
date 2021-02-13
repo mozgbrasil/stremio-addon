@@ -267,6 +267,8 @@ const getGenreMovieList = moviedb
 //
 
 async function getManifest(language = TMDB_API_LANGUAGE) {
+  // https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/manifest.md#basic-information
+
   const genreMovieList = await getGenreMovieList;
   const genres_movie = genreMovieList.map((el) => {
     return el.name;
@@ -304,8 +306,6 @@ async function getManifest(language = TMDB_API_LANGUAGE) {
     'https://images.metahub.space/background/medium/' +
     arrayIMDB[random] +
     '/img';
-
-  // https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/manifest.md#basic-information
 
   const catalogs_cinemeta = [
     {

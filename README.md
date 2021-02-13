@@ -49,6 +49,16 @@ I not only live on GitHub, I try to do a lot of things not to bother myself. To 
 
 ## Badges
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/5b413c7862034648bfd654dfaae02755)](https://www.codacy.com/gh/mozgbrasil/stremio-addon/dashboard?utm_source=github.com&utm_medium=referral&utm_content=mozgbrasil/stremio-addon&utm_campaign=Badge_Grade)
+
+[![Depfu](https://badges.depfu.com/badges/70538626cdc754f41b36f955135473c5/status.svg)](https://depfu.com)
+
+[![Depfu](https://badges.depfu.com/badges/70538626cdc754f41b36f955135473c5/overview.svg)](https://depfu.com/github/mozgbrasil/stremio-addon?project_id=22379)
+
+[![Depfu](https://badges.depfu.com/badges/70538626cdc754f41b36f955135473c5/count.svg)](https://depfu.com/github/mozgbrasil/stremio-addon?project_id=22379)
+
 [![DeepScan grade](https://deepscan.io/api/teams/12901/projects/15940/branches/327634/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=12901&pid=15940&bid=327634)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0bd49fcf-acc1-4a6d-a89c-ebf8579b7279/deploy-status)](https://app.netlify.com/sites/jovial-beaver-92b80e/deploys)
 
 :cat2:
