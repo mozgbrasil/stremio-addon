@@ -2,14 +2,13 @@
 
 ![valid XHTML][checkmark]
 
-[getcomposer]: https://getcomposer.org/
-[uninstall-mods]: https://getcomposer.org/doc/03-cli.md#remove
+[url-stremio]: https://www.stremio.com/
 
 # @mozg/stremio-addon
 
 ## Synopsis
 
-[Extension](https://stremio-dhins.herokuapp.com/) to [Stremio](https://www.stremio.com/) The next generation media center
+[Extension](https://stremio-dhins.herokuapp.com/) to [Stremio][url-stremio] The next generation media center
 
 ## Motivation
 
@@ -18,10 +17,6 @@ Disseminate the platform [Stremio](https://www.stremio.com/)
 - Stremio Addon Catalog with timeline filter
 
 Soon I must add new improvements
-
-## Deploy
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mozgbrasil/stremio-addon)
 
 # Considerations
 
@@ -51,5 +46,9 @@ You can follow me on social media 🐙😇 in the following places:
 I not only live on GitHub, I try to do a lot of things not to bother myself. To know more about me, you can visit the following links:
 
 - [Articles](http://mozg.com.br/artigos/)
+
+## Badges
+
+[![DeepScan grade](https://deepscan.io/api/teams/12901/projects/15940/branches/327634/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=12901&pid=15940&bid=327634)
 
 :cat2:
