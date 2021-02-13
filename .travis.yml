@@ -12,7 +12,8 @@ before_script:
 script:
   - 'echo -e "@script"'
   - codecov # upload coverage reports to codecov.io
-  - beamup # deploying to the BeamUp servers
+  - beamup deploy # deploying to the BeamUp servers
+  - beamup logs # view projects logs
 after_success:
   - 'echo -e "@after_success"'
 after_script:
