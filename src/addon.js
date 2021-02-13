@@ -450,10 +450,10 @@ async function getManifest(language = TMDB_API_LANGUAGE) {
 
   const descriptionCatalog = '👾' + process.env.CATALOG.toUpperCase() + '💎';
 
-  const id = 'community.mozg.timeline';
-  const name = package_manifest.name + ' 🇧🇷️';
-  // const id = 'community.mozg.' + process.env.CATALOG;
-  // const name = package_manifest.name + '-' + process.env.CATALOG + ' 🇧🇷️'
+  // const id = 'community.mozg.timeline';
+  // const name = package_manifest.name + ' 🇧🇷️';
+  const id = 'community.mozg.' + process.env.CATALOG;
+  const name = package_manifest.name + '-' + process.env.CATALOG + ' 🇧🇷️';
 
   return {
     id: id,
