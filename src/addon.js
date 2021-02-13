@@ -290,63 +290,19 @@ async function getManifest(language = TMDB_API_LANGUAGE) {
 
   const years_movie = generateArrayOfYears();
 
-  let imdb_id = [
-    'tt0016847',
-    'tt0049223',
-    'tt0078748',
-    'tt0090520',
-    'tt0121766',
-    'tt0285531',
-    'tt1446714',
-    'tt2316204',
-    'tt5073642',
-    'tt0017136',
-    'tt0055151',
-    'tt0080684',
-    'tt0092076',
-    'tt0129167',
-    'tt0300556',
-    'tt1454468',
-    'tt2527338',
-    'tt7329656',
-    'tt0021884',
-    'tt0055608',
-    'tt0083866',
-    'tt0092106',
-    'tt0139809',
-    'tt0816692',
-    'tt1564585',
-    'tt2557478',
-    'tt0046534',
-    'tt0061722',
-    'tt0086190',
-    'tt0096754',
-    'tt0140703',
-    'tt0910970',
-    'tt1823672',
-    'tt2719848',
-    'tt0046672',
-    'tt0065702',
-    'tt0088846',
-    'tt0102803',
-    'tt0142183',
-    'tt1104001',
-    'tt1971325',
-    'tt3371366',
-    'tt0048215',
-    'tt0071565',
-    'tt0089489',
-    'tt0116629',
-    'tt0182789',
-    'tt1318514',
-    'tt2109248',
-    'tt3741700',
-  ];
+  // let arrayIMDB = ['tt0016847', 'tt0049223'];
 
-  const random = Math.floor(Math.random() * imdb_id.length);
+  // var jsonIMDB = JSON.stringify(arrayIMDB);
+
+  var jsonIMDB =
+    '["tt0016847","tt0049223","tt0078748","tt0090520","tt0121766","tt0285531","tt1446714","tt2316204","tt5073642","tt0017136","tt0055151","tt0080684","tt0092076","tt0129167","tt0300556","tt1454468","tt2527338","tt7329656","tt0021884","tt0055608","tt0083866","tt0092106","tt0139809","tt0816692","tt1564585","tt2557478","tt0046534","tt0061722","tt0086190","tt0096754","tt0140703","tt0910970","tt1823672","tt2719848","tt0046672","tt0065702","tt0088846","tt0102803","tt0142183","tt1104001","tt1971325","tt3371366","tt0048215","tt0071565","tt0089489","tt0116629","tt0182789","tt1318514","tt2109248","tt3741700"]';
+
+  var arrayIMDB = JSON.parse(jsonIMDB);
+
+  const random = Math.floor(Math.random() * arrayIMDB.length);
   var background =
     'https://images.metahub.space/background/medium/' +
-    imdb_id[random] +
+    arrayIMDB[random] +
     '/img';
 
   // https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/manifest.md#basic-information

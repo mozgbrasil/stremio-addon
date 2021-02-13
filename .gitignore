@@ -120,4 +120,4 @@ dist
 #
 README.dev.md
 shell.sh
-package.json.tmp
+package.tmp.json
