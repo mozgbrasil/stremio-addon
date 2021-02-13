@@ -61,4 +61,6 @@ I not only live on GitHub, I try to do a lot of things not to bother myself. To 
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0bd49fcf-acc1-4a6d-a89c-ebf8579b7279/deploy-status)](https://app.netlify.com/sites/jovial-beaver-92b80e/deploys)
 
+[![Build Status](https://travis-ci.com/mozgbrasil/stremio-addon.svg?branch=main)](https://travis-ci.com/mozgbrasil/stremio-addon)
+
 :cat2:

@@ -1,17 +1,21 @@
-# env:
-#   global:
-#     - CODECOV_TOKEN="todo" # https://codecov.io
 language: node_js
 node_js:
   - 12
-install: npm install
-before_script:
+before_install:
+  - 'echo -e "@before_install"'
+  - npm install -g beamup-cli
   - npm install -g codecov
+install:
+  - 'echo -e "@install"'
+before_script:
+  - 'echo -e "@before_script"'
 script:
-  - npm start # see package.json scripts or gruntfile.js
+  - 'echo -e "@script"'
   - codecov # upload coverage reports to codecov.io
 after_script:
-  - - 'echo -e "@after_script"'
+  - 'echo -e "@after_script"'
+after_success:
+  - 'echo -e "@after_success"'
 notifications:
   email:
     on_success: change
