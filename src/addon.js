@@ -4,434 +4,18 @@ const logger = require('./logger.js');
 const magnet = require('magnet-uri');
 const { rarbg } = require('rarbg-api-ts');
 const webtorrentHealth = require('webtorrent-health');
-const { MovieDb } = require('moviedb-promise');
-const moviedb = new MovieDb(process.env.TMDB_API);
-const TMDB_API_LANGUAGE = 'pt-BR';
+
 const package_manifest = require('../package.json');
 // const fetch = require('node-fetch');
-var sprintf = require('sprintf-js').sprintf,
-  vsprintf = require('sprintf-js').vsprintf;
-//
 
-function isNumeric(value) {
-  return /^\d+$/.test(value);
-}
-
-//
-
-// https://www.npmjs.com/package/moviedb-promise
-
-async function getGenreList(language, type) {
-  if (type === 'movie') {
-    const getGenreMovieList = moviedb
-      .genreMovieList({ language: language })
-      .then((res) => {
-        return res.genres;
-      })
-      .catch(console.error);
-
-    return getGenreMovieList;
-  } else {
-    const getGenreTvList = moviedb
-      .genreTvList({ language: language })
-      .then((res) => {
-        return res.genres;
-      })
-      .catch(console.error);
-
-    return getGenreTvList;
-  }
-}
-
-async function getGenres(type, language, genre, page) {
-  if (type === 'movie') {
-    const genre_id = await getGenreList(language, type);
-
-    var parameters;
-
-    if (isNumeric(genre)) {
-      parameters = {
-        language: language,
-        page: page,
-        primary_release_year: genre,
-      };
-    } else {
-      const gen_name = genre_id.find((x) => x.name === genre).id;
-      parameters = {
-        language: language,
-        page: page,
-        with_genres: gen_name,
-      };
-    }
-
-    const getDiscoverMovie = moviedb
-      .discoverMovie(parameters)
-      .then(async (res) => {
-        const resp = res.results;
-        const metas = await Promise.all(
-          resp.map(async (el) => {
-            const genre = el.genre_ids.map((el) => {
-              const gen_name = genre_id.find((x) => x.id === el).name;
-              return gen_name;
-            });
-            const year = el.release_date.substr(0, 4);
-
-            const movieInfo = await moviedb
-              .movieInfo({ id: el.id })
-              .then((res) => {
-                // console.log('movieInfo: ', res);
-                return res;
-              })
-              .catch(console.error);
-
-            const imdb_id = movieInfo.imdb_id;
-
-            return {
-              id: `${imdb_id}`,
-              name: `${el.title}`,
-              genre: genre,
-              poster: `https://image.tmdb.org/t/p/original${el.poster_path}`,
-              posterShape: 'regular',
-              imdbRating: `${el.vote_average}`,
-              year: year,
-              type: `${type}`,
-              description: `${el.overview}`,
-            };
-          })
-        );
-        return Promise.resolve({ metas });
-      })
-      .catch(console.error);
-
-    console.log('getGenres->getDiscoverMovie: ', getDiscoverMovie);
-    return getDiscoverMovie;
-  } else {
-    const genre_id = await getGenreList(language, type);
-
-    if (isNumeric(genre)) {
-      var parameters = {
-        language: language,
-        page: page,
-        first_air_date_year: genre,
-      };
-    } else {
-      const gen_name = genre_id.find((x) => x.name === genre).id;
-      var parameters = {
-        language: language,
-        page: page,
-        with_genres: gen_name,
-      };
-    }
-
-    const getDiscoverTv = moviedb
-      .discoverTv(parameters)
-      .then(async (res) => {
-        const resp = res.results;
-        const metas = await Promise.all(
-          resp.map(async (el) => {
-            const tvInfo = await moviedb
-              .tvInfo({ id: el.id, append_to_response: 'external_ids' })
-              .then((res) => {
-                // console.log('tvInfo: ', res);
-                return res;
-              })
-              .catch(console.error);
-
-            const imdb_id = tvInfo.external_ids.imdb_id;
-
-            return {
-              id: `${imdb_id}`,
-              name: `${el.name}`,
-              genre: `${el.genre_ids}`,
-              poster: `https://image.tmdb.org/t/p/original${el.poster_path}`,
-              posterShape: 'regular',
-              imdbRating: `${el.vote_average}`,
-              year: year,
-              type: `${type}`,
-              description: `${el.overview}`,
-            };
-          })
-        );
-        return Promise.resolve({ metas });
-      })
-      .catch(console.error);
-
-    console.log('getGenres->getDiscoverTv: ', getDiscoverTv);
-    return getDiscoverTv;
-  }
-}
-
-async function getCatalog(type, language, page) {
-  if (type === 'movie') {
-    const genre_id = await getGenreList(language, type);
-    const getDiscoverMovie = moviedb
-      .discoverMovie({
-        language: language,
-        page: page,
-        // append_to_response: 'videos',
-      })
-      .then(async (res) => {
-        // console.log('discoverMovie->res: ', res);
-        const resp = res.results;
-        const metas = await Promise.all(
-          resp.map(async (el) => {
-            const genre = el.genre_ids.map((el) => {
-              const gen_name = genre_id.find((x) => x.id === el).name;
-              return gen_name;
-            });
-            const year = el.release_date.substr(0, 4);
-
-            const movieInfo = await moviedb
-              .movieInfo({ id: el.id })
-              .then((res) => {
-                // console.log('movieInfo: ', res);
-                return res;
-              })
-              .catch(console.error);
-
-            const imdb_id = movieInfo.imdb_id;
-
-            return {
-              id: `${imdb_id}`,
-              name: `${el.title}`,
-              genre: genre,
-              poster: `https://image.tmdb.org/t/p/original${el.poster_path}`,
-              posterShape: 'regular',
-              imdbRating: `${el.vote_average}`,
-              year: year,
-              type: `${type}`,
-              description: `${el.overview}`,
-            };
-          })
-        );
-        return Promise.resolve({ metas });
-      })
-      .catch(console.error);
-
-    console.log('getCatalog->getDiscoverMovie: ', getDiscoverMovie);
-    return getDiscoverMovie;
-  } else {
-    const getDiscoverTv = moviedb
-      .discoverTv({ language: language, page: page })
-      .then(async (res) => {
-        const resp = res.results;
-        const metas = await Promise.all(
-          resp.map(async (el) => {
-            const year = el.first_air_date.substr(0, 4);
-
-            const tvInfo = await moviedb
-              .tvInfo({ id: el.id, append_to_response: 'external_ids' })
-              .then((res) => {
-                // console.log('tvInfo: ', res);
-                return res;
-              })
-              .catch(console.error);
-
-            const imdb_id = tvInfo.external_ids.imdb_id;
-
-            return {
-              id: `${imdb_id}`,
-              name: `${el.name}`,
-              poster: `https://image.tmdb.org/t/p/original${el.poster_path}`,
-              posterShape: 'regular',
-              imdbRating: `${el.vote_average}`,
-              year: year,
-              type: `${type}`,
-              description: `${el.overview}`,
-            };
-          })
-        );
-        return Promise.resolve({ metas });
-      })
-      .catch(console.error);
-
-    console.log('getCatalog->getDiscoverTv: ', getDiscoverTv);
-    return getDiscoverTv;
-  }
-}
-
-const getGenreTvList = moviedb
-  .genreTvList({ language: TMDB_API_LANGUAGE })
-  .then((res) => {
-    return res.genres;
-  })
-  .catch(console.error);
-
-const getGenreMovieList = moviedb
-  .genreMovieList({ language: TMDB_API_LANGUAGE })
-  .then((res) => {
-    return res.genres;
-  })
-  .catch(console.error);
-
-//
-
-async function getManifest(language = TMDB_API_LANGUAGE) {
-  // https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/manifest.md#basic-information
-
-  const genreMovieList = await getGenreMovieList;
-  const genres_movie = genreMovieList.map((el) => {
-    return el.name;
-  });
-
-  const genreTvList = await getGenreTvList;
-  const genres_series = genreTvList.map((el) => {
-    return el.name;
-  });
-
-  function generateArrayOfYears() {
-    var max = new Date().getFullYear();
-    var min = max - 150;
-    var years = [];
-
-    for (var i = max; i >= min; i--) {
-      years.push(i);
-    }
-    return years;
-  }
-
-  const years_movie = generateArrayOfYears();
-
-  // let arrayIMDB = ['tt0016847', 'tt0049223'];
-
-  // var jsonIMDB = JSON.stringify(arrayIMDB);
-
-  var jsonIMDB =
-    '["tt0016847","tt0049223","tt0078748","tt0090520","tt0121766","tt0285531","tt1446714","tt2316204","tt5073642","tt0017136","tt0055151","tt0080684","tt0092076","tt0129167","tt0300556","tt1454468","tt2527338","tt7329656","tt0021884","tt0055608","tt0083866","tt0092106","tt0139809","tt0816692","tt1564585","tt2557478","tt0046534","tt0061722","tt0086190","tt0096754","tt0140703","tt0910970","tt1823672","tt2719848","tt0046672","tt0065702","tt0088846","tt0102803","tt0142183","tt1104001","tt1971325","tt3371366","tt0048215","tt0071565","tt0089489","tt0116629","tt0182789","tt1318514","tt2109248","tt3741700"]';
-
-  var arrayIMDB = JSON.parse(jsonIMDB);
-
-  const random = Math.floor(Math.random() * arrayIMDB.length);
-  var background =
-    'https://images.metahub.space/background/medium/' +
-    arrayIMDB[random] +
-    '/img';
-
-  const catalogs_cinemeta = [
-    {
-      type: 'movie',
-      id: 'movie.top.cinemeta',
-      extraSupported: ['search', 'genre', 'skip'],
-      genres: genres_movie,
-      name: 'Top 🇧🇷️ - CINEMETA',
-    },
-    {
-      type: 'series',
-      id: 'series.top.cinemeta',
-      extraSupported: ['search', 'genre', 'skip'],
-      genres: genres_series,
-      name: 'Top 🇧🇷️ - CINEMETA',
-    },
-    {
-      type: 'movie',
-      id: 'movie.year.cinemeta',
-      genres: years_movie,
-      extra: [
-        {
-          name: 'genre',
-          options: years_movie,
-          isRequired: true,
-        },
-      ],
-      extraSupported: ['genre'],
-      extraRequired: ['genre'],
-      name: 'By year 🇧🇷 - CINEMETA️',
-    },
-    {
-      type: 'series',
-      id: 'series.year.cinemeta',
-      genres: years_movie,
-      extra: [
-        {
-          name: 'genre',
-          options: years_movie,
-          isRequired: true,
-        },
-      ],
-      extraSupported: ['genre'],
-      extraRequired: ['genre'],
-      name: 'By year 🇧🇷️ - CINEMETA',
-    },
-  ];
-
-  const catalogs_tmdb = [
-    {
-      type: 'movie',
-      id: 'movie.top.tmdb',
-      extraSupported: ['search', 'genre', 'skip'],
-      genres: genres_movie,
-      name: 'Top 🇧🇷️ - TMDB',
-    },
-    {
-      type: 'series',
-      id: 'series.top.tmdb',
-      extraSupported: ['search', 'genre', 'skip'],
-      genres: genres_series,
-      name: 'Top 🇧🇷️ - TMDB',
-    },
-    {
-      type: 'movie',
-      id: 'movie.year.tmdb',
-      genres: years_movie,
-      extra: [
-        {
-          name: 'genre',
-          options: years_movie,
-          isRequired: true,
-        },
-      ],
-      extraSupported: ['genre'],
-      extraRequired: ['genre'],
-      name: 'By year 🇧🇷 - TMDB️',
-    },
-    {
-      type: 'series',
-      id: 'series.year.tmdb',
-      genres: years_movie,
-      extra: [
-        {
-          name: 'genre',
-          options: years_movie,
-          isRequired: true,
-        },
-      ],
-      extraSupported: ['genre'],
-      extraRequired: ['genre'],
-      name: 'By year 🇧🇷️ - TMDB',
-    },
-  ];
-
-  const varName = 'catalogs_' + process.env.CATALOG;
-  const catalogs = eval(varName);
-
-  const descriptionCatalog = '👾' + process.env.CATALOG.toUpperCase() + '💎';
-
-  // const id = 'community.mozg.timeline';
-  // const name = package_manifest.name + ' 🇧🇷️';
-  const id = 'community.mozg.' + process.env.CATALOG;
-  const name = package_manifest.name + '-' + process.env.CATALOG + ' 🇧🇷️';
-
-  return {
-    id: id,
-    name: name,
-    description:
-      '❤️ ' + sprintf(package_manifest.description, descriptionCatalog),
-    version: package_manifest.version,
-    resources: [
-      'catalog',
-      'stream',
-      // , 'meta'
-      // , 'subtitles'
-    ],
-    types: ['movie', 'series'],
-    idPrefixes: [''],
-    catalogs: catalogs,
-    background: background,
-    logo:
-      'https://s.gravatar.com/avatar/38385ec9b5375a77513a4dad6aebca08?s=256',
-    contactEmail: 'mozgbrasil@gmail.com',
-  };
-}
+const { getManifest } = require('./manifest');
+const {
+  getGenreList,
+  getGenres,
+  getCatalog,
+  getGenreTvList,
+  getGenreMovieList,
+} = require('./moviedb');
 
 //
 
@@ -467,8 +51,7 @@ const robots = {
 
     // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/manifest.md
 
-    const language = TMDB_API_LANGUAGE;
-    const manifest = await getManifest(language);
+    const manifest = await getManifest();
 
     // console.log('manifest: ', manifest);
 
@@ -697,12 +280,12 @@ const robots = {
           // console.log(`Received Todo ${idx + 1}:`, todo);
         }
 
-        // síncrona
+        // sincrona
         // for (const [idx, val] of streams.entries()) {
         //   iterator(val, idx);
         // }
 
-        // assíncrona
+        // assincrona
         const promises = streams.map(async (val, idx) => iterator(val, idx));
         await Promise.all(promises);
 
@@ -791,13 +374,9 @@ const robots = {
 
       let type = args.type;
 
-      let language = TMDB_API_LANGUAGE;
-
       let page = (args.extra || {}).skip
         ? Math.round(args.extra.skip / 20) + 1
         : 1;
-
-      console.log('page: ', page);
 
       let extra_ids = [
         'movie.top.cinemeta',
@@ -820,27 +399,62 @@ const robots = {
         source = source[2];
       }
 
+      var metas = [];
+
       switch (source) {
         case 'cinemeta':
         case 'tmdb':
-          if (args.extra && args.extra.genre) {
-            const genre = args.extra.genre;
-            var metas = await getGenres(type, language, genre, page);
-          } else {
-            var metas = await getCatalog(type, language, page);
+          //
+          // assincrona
+          async function iterator(val, idx) {
+            var page = val;
+
+            if (args.extra && args.extra.genre) {
+              const genre = args.extra.genre;
+              var _getCatalog = await getGenres(type, genre, page);
+            } else {
+              var _getCatalog = await getCatalog(type, page);
+            }
+            // console.log(`iterator->_getCatalog (${page}):`, _getCatalog);
+
+            getMetas = _getCatalog.metas;
+            // getMetas = getMetas.slice(0, 2);
+            // console.log(
+            //   `iterator->_getCatalog->getMetas (${page}):`,
+            //   getMetas
+            // );
+
+            metas = metas.concat(getMetas);
+
+            console.log(`iterator->_getCatalog->metas (${page}):`, 'metas');
           }
-          console.log('addon->metas: ', metas['metas'][0].id);
+
+          function range(start, end) {
+            return Array(end - start + 1)
+              .fill()
+              .map((_, idx) => start + idx);
+          }
+          var array_range = range(page, page + 9);
+          console.log(
+            `addon->array_range (${array_range.length}): `,
+            array_range
+          );
+          const promises = array_range.map(async (val, idx) =>
+            iterator(val, idx)
+          );
+          await Promise.all(promises);
+          //
+
+          console.log(`addon->metas (${metas.length}): `, 'metas');
+
           break;
 
         default:
           console.log('Default case');
-          var metas = [];
-          metas[metas] = [];
           break;
       }
 
-      // return Promise.resolve({ metas: [] });
-      return Promise.resolve({ metas: metas['metas'] });
+      return Promise.resolve({ metas: metas });
     });
 
     // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineSubtitlesHandler.md
