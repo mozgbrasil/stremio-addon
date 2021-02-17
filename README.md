@@ -14,9 +14,9 @@ This project was created due to the need to display more years in the filter per
 
 Foi feito a publicação das seguintes extensões
 
-[[Extension](https://stremio-addon-tmdb.herokuapp.com/)](https://stremio-addon-tmdb.herokuapp.com/)
+[https://stremio-addon-tmdb.herokuapp.com/](https://stremio-addon-tmdb.herokuapp.com/)
 
-[[Extension](https://stremio-addon-cinemeta.herokuapp.com/)](https://stremio-addon-cinemeta.herokuapp.com/)
+[https://stremio-addon-cinemeta.herokuapp.com/](https://stremio-addon-cinemeta.herokuapp.com/)
 
 ## Motivation
 
