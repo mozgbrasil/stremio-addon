@@ -168,7 +168,7 @@ async function getManifest() {
   const id = 'community.mozg.' + process.env.APP_CATALOG;
   const name = '' + process.env.APP_CATALOG + ' X️_tend';
   var description =
-    '❤️ ' + sprintf(package_manifest.description, descriptionCatalog);
+    '' + sprintf(package_manifest.description, descriptionCatalog);
 
   return {
     id: id,
