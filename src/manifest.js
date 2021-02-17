@@ -154,12 +154,14 @@ async function getManifest() {
   // const name = package_manifest.name + ' 🇧🇷️';
   const id = 'community.mozg.' + process.env.APP_CATALOG;
   const name = package_manifest.name + '-' + process.env.APP_CATALOG + ' 🇧🇷️';
+  var description =
+    '❤️ ' + sprintf(package_manifest.description, descriptionCatalog);
+  description += ' 👁️‍🗨️ ' + process.env.APP_URL;
 
   return {
     id: id,
     name: name,
-    description:
-      '❤️ ' + sprintf(package_manifest.description, descriptionCatalog),
+    description: description,
     version: package_manifest.version,
     resources: [
       'catalog',
