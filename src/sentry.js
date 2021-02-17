@@ -100,11 +100,14 @@ if (process.env.APP_SENTRY_DSN) {
   const Sentry = require('@sentry/node');
   const { Integrations } = require('@sentry/tracing');
   var name = package_manifest.name;
+  name = name.replace('@', '');
   name = name.replace('/', '-');
+  var version = package_manifest.version;
+  var release = name + '@' + version;
   const parameters = {
     dsn: process.env.APP_SENTRY_DSN,
     // To set your release version
-    release: name + '@' + package_manifest.version,
+    release: release,
     integrations: [new Integrations.BrowserTracing()],
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
