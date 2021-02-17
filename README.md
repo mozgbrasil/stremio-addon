@@ -10,13 +10,17 @@
 
 [Extension](https://stremio-dhins.herokuapp.com/) to [Stremio][url-stremio] The next generation media center
 
+This project was created due to the need to display more years in the filter per year
+
+Foi feito a publicação das seguintes extensões
+
+[[Extension](https://stremio-addon-tmdb.herokuapp.com/)](https://stremio-addon-tmdb.herokuapp.com/)
+
+[[Extension](https://stremio-addon-cinemeta.herokuapp.com/)](https://stremio-addon-cinemeta.herokuapp.com/)
+
 ## Motivation
 
 Disseminate the platform [Stremio](https://www.stremio.com/)
-
-- Stremio Addon Catalog with timeline filter
-
-Soon I must add new improvements
 
 # Considerations
 

@@ -1,7 +1,7 @@
 {
   "name": "@mozg/stremio-addon",
   "version": "1.0.10",
-  "description": "Stremio with Error Monitoring and with Log Data and with %s Catalog pt-BR and with Extended Year Filter and with Multi Sources Streams and with ... ☢️ Deploying 16/02/2021 22:28:37 ♻️",
+  "description": "This extension was created due to the need to display more years in the filter per year, %s",
   "author": "USR <mozgbrasil@gmail.com>",
   "homepage": "https://github.com/mozgbrasil/stremio-addon",
   "license": "ISC",

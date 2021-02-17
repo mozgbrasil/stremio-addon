@@ -56,14 +56,14 @@ async function getManifest() {
       id: 'movie.top.cinemeta',
       extraSupported: ['search', 'genre', 'skip'],
       genres: genres_movie,
-      name: 'Top 🇧🇷️ CINEMETA',
+      name: 'Top -️️ CINEMETA',
     },
     {
       type: 'series',
       id: 'series.top.cinemeta',
       extraSupported: ['search', 'genre', 'skip'],
       genres: genres_series,
-      name: 'Top 🇧🇷️ CINEMETA',
+      name: 'Top -️️ CINEMETA',
     },
     {
       type: 'movie',
@@ -78,7 +78,7 @@ async function getManifest() {
       ],
       extraSupported: ['genre'],
       extraRequired: ['genre'],
-      name: 'By year 🇧🇷 CINEMETA️',
+      name: 'By year -️ CINEMETA️',
     },
     {
       type: 'series',
@@ -93,7 +93,7 @@ async function getManifest() {
       ],
       extraSupported: ['genre'],
       extraRequired: ['genre'],
-      name: 'By year 🇧🇷️ CINEMETA',
+      name: 'By year -️️ CINEMETA',
     },
   ];
 
@@ -103,14 +103,14 @@ async function getManifest() {
       id: 'movie.top.tmdb',
       extraSupported: ['search', 'genre', 'skip'],
       genres: genres_movie,
-      name: 'Top 🇧🇷️ TMDB',
+      name: 'Top -️️ TMDB',
     },
     {
       type: 'series',
       id: 'series.top.tmdb',
       extraSupported: ['search', 'genre', 'skip'],
       genres: genres_series,
-      name: 'Top 🇧🇷️ TMDB',
+      name: 'Top -️️ TMDB',
     },
     {
       type: 'movie',
@@ -125,7 +125,7 @@ async function getManifest() {
       ],
       extraSupported: ['genre'],
       extraRequired: ['genre'],
-      name: 'By year 🇧🇷 TMDB️',
+      name: 'By year -️ TMDB️',
     },
     {
       type: 'series',
@@ -140,23 +140,35 @@ async function getManifest() {
       ],
       extraSupported: ['genre'],
       extraRequired: ['genre'],
-      name: 'By year 🇧🇷️ TMDB',
+      name: 'By year -️ TMDB',
     },
   ];
 
   const varName = 'catalogs_' + process.env.APP_CATALOG;
   const catalogs = eval(varName);
 
-  const descriptionCatalog =
-    '👾' + process.env.APP_CATALOG.toUpperCase() + '💎';
+  switch (process.env.APP_CATALOG) {
+    case 'tmdb':
+      var descriptionCatalog =
+        '(' +
+        process.env.APP_CATALOG.toUpperCase() +
+        ') displays instead of 100 instead of 20 records';
+      break;
+    case 'cinemeta':
+      var descriptionCatalog =
+        '(' +
+        process.env.APP_CATALOG.toUpperCase() +
+        ') displays instead of 500 instead of 100 records';
+      break;
+    default:
+      console.log('Default case');
+      break;
+  }
 
-  // const id = 'community.mozg.timeline';
-  // const name = package_manifest.name + ' 🇧🇷️';
   const id = 'community.mozg.' + process.env.APP_CATALOG;
-  const name = package_manifest.name + '-' + process.env.APP_CATALOG + ' 🇧🇷️';
+  const name = '' + process.env.APP_CATALOG + ' X️_tend';
   var description =
     '❤️ ' + sprintf(package_manifest.description, descriptionCatalog);
-  description += ' 👁️‍🗨️ ' + process.env.APP_URL;
 
   return {
     id: id,
@@ -165,7 +177,7 @@ async function getManifest() {
     version: package_manifest.version,
     resources: [
       'catalog',
-      'stream',
+      // 'stream',
       // , 'meta'
       // , 'subtitles'
     ],
@@ -175,7 +187,6 @@ async function getManifest() {
     background: background,
     logo:
       'https://s.gravatar.com/avatar/38385ec9b5375a77513a4dad6aebca08?s=256',
-    contactEmail: 'mozgbrasil@gmail.com',
   };
 }
 
