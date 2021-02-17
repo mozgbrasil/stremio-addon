@@ -99,17 +99,34 @@ const captureMessage =
 if (process.env.SENTRY_DSN) {
   const Sentry = require('@sentry/node');
   const { Integrations } = require('@sentry/tracing');
+  var name = package_manifest.name;
+  name = name.replace('/', '-');
   const parameters = {
     dsn: process.env.SENTRY_DSN,
     // To set your release version
-    release: 'my-project-name@' + process.env.npm_package_version,
+    release: name + '@' + package_manifest.version,
     integrations: [new Integrations.BrowserTracing()],
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
     // We recommend adjusting this value in production
     tracesSampleRate: 1.0,
   };
+
   Sentry.init(parameters);
+
+  // Set user information, as well as tags and further extras
+  Sentry.configureScope((scope) => {
+    scope.setExtra('battery', 0.7);
+    scope.setTag('user_mode', 'admin');
+    scope.setUser({ id: '4711' });
+    scope.setExtra('env', process.env);
+    // scope.clear();
+  });
+
+  // Add a breadcrumb for future events
+  Sentry.addBreadcrumb({
+    message: 'My Breadcrumb',
+  });
 
   Sentry.captureMessage(captureMessage);
 
