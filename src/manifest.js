@@ -56,14 +56,14 @@ async function getManifest() {
       id: 'movie.top.cinemeta',
       extraSupported: ['search', 'genre', 'skip'],
       genres: genres_movie,
-      name: 'Top 🇧🇷️ - CINEMETA',
+      name: 'Top 🇧🇷️ CINEMETA',
     },
     {
       type: 'series',
       id: 'series.top.cinemeta',
       extraSupported: ['search', 'genre', 'skip'],
       genres: genres_series,
-      name: 'Top 🇧🇷️ - CINEMETA',
+      name: 'Top 🇧🇷️ CINEMETA',
     },
     {
       type: 'movie',
@@ -78,7 +78,7 @@ async function getManifest() {
       ],
       extraSupported: ['genre'],
       extraRequired: ['genre'],
-      name: 'By year 🇧🇷 - CINEMETA️',
+      name: 'By year 🇧🇷 CINEMETA️',
     },
     {
       type: 'series',
@@ -93,7 +93,7 @@ async function getManifest() {
       ],
       extraSupported: ['genre'],
       extraRequired: ['genre'],
-      name: 'By year 🇧🇷️ - CINEMETA',
+      name: 'By year 🇧🇷️ CINEMETA',
     },
   ];
 
@@ -103,14 +103,14 @@ async function getManifest() {
       id: 'movie.top.tmdb',
       extraSupported: ['search', 'genre', 'skip'],
       genres: genres_movie,
-      name: 'Top 🇧🇷️ - TMDB',
+      name: 'Top 🇧🇷️ TMDB',
     },
     {
       type: 'series',
       id: 'series.top.tmdb',
       extraSupported: ['search', 'genre', 'skip'],
       genres: genres_series,
-      name: 'Top 🇧🇷️ - TMDB',
+      name: 'Top 🇧🇷️ TMDB',
     },
     {
       type: 'movie',
@@ -125,7 +125,7 @@ async function getManifest() {
       ],
       extraSupported: ['genre'],
       extraRequired: ['genre'],
-      name: 'By year 🇧🇷 - TMDB️',
+      name: 'By year 🇧🇷 TMDB️',
     },
     {
       type: 'series',
@@ -140,7 +140,7 @@ async function getManifest() {
       ],
       extraSupported: ['genre'],
       extraRequired: ['genre'],
-      name: 'By year 🇧🇷️ - TMDB',
+      name: 'By year 🇧🇷️ TMDB',
     },
   ];
 

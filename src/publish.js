@@ -1,4 +1,5 @@
 // for more information on deploying, see: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/deploying/README.md
+// https://stremio.github.io/stremio-publish-addon/index.html
 const { publishToCentral } = require('stremio-addon-sdk');
 
 if (process.argv.length == 3) {
