@@ -144,15 +144,16 @@ async function getManifest() {
     },
   ];
 
-  const varName = 'catalogs_' + process.env.CATALOG;
+  const varName = 'catalogs_' + process.env.APP_CATALOG;
   const catalogs = eval(varName);
 
-  const descriptionCatalog = '👾' + process.env.CATALOG.toUpperCase() + '💎';
+  const descriptionCatalog =
+    '👾' + process.env.APP_CATALOG.toUpperCase() + '💎';
 
   // const id = 'community.mozg.timeline';
   // const name = package_manifest.name + ' 🇧🇷️';
-  const id = 'community.mozg.' + process.env.CATALOG;
-  const name = package_manifest.name + '-' + process.env.CATALOG + ' 🇧🇷️';
+  const id = 'community.mozg.' + process.env.APP_CATALOG;
+  const name = package_manifest.name + '-' + process.env.APP_CATALOG + ' 🇧🇷️';
 
   return {
     id: id,

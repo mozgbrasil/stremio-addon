@@ -9,17 +9,17 @@ const captureMessage =
 
 //
 
-// if (process.env.FIREBASE_APIKEY) {
+// if (process.env.APP_FIREBASE_APIKEY) {
 //   var firebase = require('firebase');
 
 //   var firebaseConfig = {
-//     apiKey: process.env.FIREBASE_APIKEY,
-//     authDomain: process.env.FIREBASE_AUTHDOMAIN,
-//     databaseURL: process.env.FIREBASE_DATABASEURL,
-//     projectId: process.env.FIREBASE_PROJECTID,
-//     storageBucket: process.env.FIREBASE_STORAGEBUCKET,
-//     messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
-//     appId: process.env.FIREBASE_APPID,
+//     apiKey: process.env.APP_FIREBASE_APIKEY,
+//     authDomain: process.env.APP_FIREBASE_AUTHDOMAIN,
+//     databaseURL: process.env.APP_FIREBASE_DATABASEURL,
+//     projectId: process.env.APP_FIREBASE_PROJECTID,
+//     storageBucket: process.env.APP_FIREBASE_STORAGEBUCKET,
+//     messagingSenderId: process.env.APP_FIREBASE_MESSAGINGSENDERID,
+//     appId: process.env.APP_FIREBASE_APPID,
 //   };
 
 //   var app = firebase.initializeApp(firebaseConfig);
@@ -43,10 +43,10 @@ const captureMessage =
 
 //
 
-// if (process.env.GA_TRACKING_ID) {
+// if (process.env.APP_GA_TRACKING_ID) {
 //   const fetch = require('node-fetch');
 
-//   const { GA_TRACKING_ID } = process.env;
+//   const { APP_GA_TRACKING_ID } = process.env;
 
 //   const trackEvent = (category, action, label, value) => {
 //     const data = {
@@ -96,13 +96,13 @@ const captureMessage =
 
 //
 
-if (process.env.SENTRY_DSN) {
+if (process.env.APP_SENTRY_DSN) {
   const Sentry = require('@sentry/node');
   const { Integrations } = require('@sentry/tracing');
   var name = package_manifest.name;
   name = name.replace('/', '-');
   const parameters = {
-    dsn: process.env.SENTRY_DSN,
+    dsn: process.env.APP_SENTRY_DSN,
     // To set your release version
     release: name + '@' + package_manifest.version,
     integrations: [new Integrations.BrowserTracing()],

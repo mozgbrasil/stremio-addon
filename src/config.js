@@ -5,12 +5,12 @@ var env = process.env.NODE_ENV;
 switch (env) {
   case 'production':
     config.port = process.env.PORT;
-    config.local = `https://9b7c457c25d2-stremio-addon-${process.env.CATALOG}.baby-beamup.club/`;
+    config.local = process.env.APP_URL;
     break;
   case 'development':
   case undefined:
     config.port = 7000;
-    config.local = 'http://127.0.0.1:' + config.port;
+    config.local = process.env.APP_URL + ':' + config.port;
     break;
 }
 

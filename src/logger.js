@@ -1,8 +1,8 @@
 const logzioLogger = require('logzio-nodejs').createLogger({
-  token: process.env.LOGGER_TOKEN,
-  // host: process.env.LOGGER_HOST,
-  // supressErrors: process.env.LOGGER_SUPRESS_ERRORS,
-  // debug: process.env.LOGGER_INCLUDE_DEBUG
+  token: process.env.APP_LOGGER_TOKEN,
+  // host: process.env.APP_LOGGER_HOST,
+  // supressErrors: process.env.APP_LOGGER_SUPRESS_ERRORS,
+  // debug: process.env.APP_LOGGER_INCLUDE_DEBUG
 });
 
 const log4js = require('log4js');
@@ -15,7 +15,7 @@ log4js.configure({
   categories: {
     default: {
       appenders: ['console'],
-      level: process.env.LOG_LEVEL,
+      level: process.env.APP_LOG_LEVEL,
     },
   },
 });
