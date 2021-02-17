@@ -122,7 +122,7 @@ if (process.env.APP_SENTRY_DSN) {
     scope.setExtra('battery', 0.7);
     scope.setTag('user_mode', 'admin');
     scope.setUser({ id: '4711' });
-    scope.setExtra('env', process.env);
+    // scope.setExtra('env', process.env);
     // scope.clear();
   });
 
