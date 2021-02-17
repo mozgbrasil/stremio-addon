@@ -438,7 +438,7 @@ const robots = {
                 .fill()
                 .map((_, idx) => start + idx);
             }
-            var array_range = range(page, page + 4);
+            var array_range = range(page, page + 2);
             console.log(
               `tmdb->addon->array_range (${array_range.length}): `,
               array_range

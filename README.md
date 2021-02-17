@@ -10,13 +10,15 @@
 
 [Extension](https://stremio-dhins.herokuapp.com/) to [Stremio][url-stremio] The next generation media center
 
-This project was created due to the need to display more years in the filter per year
-
-Foi feito a publicação das seguintes extensões
+The following extensions have been published
 
 [https://stremio-addon-tmdb.herokuapp.com/](https://stremio-addon-tmdb.herokuapp.com/)
 
+This extension was created due to the need to display more years in the filter per year, (TMDB) displays instead of 60 instead of 20 records
+
 [https://stremio-addon-cinemeta.herokuapp.com/](https://stremio-addon-cinemeta.herokuapp.com/)
+
+This extension was created due to the need to display more years in the filter per year, (CINEMETA) displays instead of 500 instead of 100 records
 
 ## Motivation
 

@@ -152,7 +152,7 @@ async function getManifest() {
       var descriptionCatalog =
         '(' +
         process.env.APP_CATALOG.toUpperCase() +
-        ') displays instead of 100 instead of 20 records';
+        ') displays instead of 60 instead of 20 records';
       break;
     case 'cinemeta':
       var descriptionCatalog =
@@ -166,7 +166,7 @@ async function getManifest() {
   }
 
   const id = 'community.mozg.' + process.env.APP_CATALOG;
-  const name = '' + process.env.APP_CATALOG + ' X️_tend';
+  const name = '' + process.env.APP_CATALOG + ' Extend';
   var description =
     '' + sprintf(package_manifest.description, descriptionCatalog);
 
