@@ -102,6 +102,7 @@ if (process.env.APP_SENTRY_DSN) {
   var name = package_manifest.name;
   name = name.replace('@', '');
   name = name.replace('/', '-');
+  name += `-${process.env.APP_CATALOG}`;
   var version = package_manifest.version;
   var release = name + '@' + version;
   const parameters = {
