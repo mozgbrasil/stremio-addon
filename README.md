@@ -14,11 +14,11 @@ The following extensions have been published
 
 [https://stremio-addon-tmdb.herokuapp.com/](https://stremio-addon-tmdb.herokuapp.com/)
 
-This extension was created due to the need to display more years in the filter per year, (TMDB) displays instead of 60 instead of 20 records
+This extension was created due to the need to display more years in the filter per year, (TMDB) displays 40 records instead of 20 records
 
 [https://stremio-addon-cinemeta.herokuapp.com/](https://stremio-addon-cinemeta.herokuapp.com/)
 
-This extension was created due to the need to display more years in the filter per year, (CINEMETA) displays instead of 500 instead of 100 records
+This extension was created due to the need to display more years in the filter per year, (CINEMETA) displays 500 records instead of 100 records
 
 ## Motivation
 
@@ -34,18 +34,12 @@ If you liked this project, consider giving a 🌟 or donating.
 
 Also check out my [GitHub Account](https://github.com/mozgbrasil) where I have other articles and applications that you might find interesting.
 
-## To hire 👨💻
-
-If you want me to help you, I'm available to hire.
-
-Contact mozgbrasil@gmail.com
-
 ## Where to follow
 
 You can follow me on social media 🐙😇 in the following places:
 
-- [GitHub] (https://github.com/mozgbrasil)
-- [Twitter] (https://twitter.com/mozgbrasil)
+- [GitHub](https://github.com/mozgbrasil)
+- [Twitter](https://twitter.com/mozgbrasil)
 
 ## More about me
 

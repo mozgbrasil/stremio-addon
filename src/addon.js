@@ -438,7 +438,7 @@ const robots = {
                 .fill()
                 .map((_, idx) => start + idx);
             }
-            var array_range = range(page, page + 2);
+            var array_range = range(page, page + 1);
             console.log(
               `tmdb->addon->array_range (${array_range.length}): `,
               array_range
@@ -460,8 +460,6 @@ const robots = {
           await (async () => {
             // Self-Invoking Functions
 
-            // @TODO
-
             let skip = (args.extra || {}).skip
               ? Math.round(args.extra.skip) + 1
               : 0;
@@ -476,6 +474,7 @@ const robots = {
 
               if (args.extra && args.extra.genre) {
                 const genre = args.extra.genre;
+                // @TODO skip
                 var url = `https://v3-cinemeta.strem.io/catalog/${type}/${id_catalog}/genre=${genre}.json`;
                 console.log(`cinemeta->iterator->url (${skip}):`, url);
                 var _getCatalog = await fetch(url).then((res) => res.json());

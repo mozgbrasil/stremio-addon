@@ -152,13 +152,13 @@ async function getManifest() {
       var descriptionCatalog =
         '(' +
         process.env.APP_CATALOG.toUpperCase() +
-        ') displays instead of 60 instead of 20 records';
+        ') displays 40 records instead of 20 records';
       break;
     case 'cinemeta':
       var descriptionCatalog =
         '(' +
         process.env.APP_CATALOG.toUpperCase() +
-        ') displays instead of 500 instead of 100 records';
+        ') displays 500 records instead of 100 records';
       break;
     default:
       console.log('Default case');
