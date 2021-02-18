@@ -14,6 +14,15 @@ switch (env) {
     break;
 }
 
+//
+
+function isNumeric(value) {
+  return /^\d+$/.test(value);
+}
+
+//
+
 module.exports = {
   config,
+  isNumeric,
 };

@@ -1,13 +1,11 @@
 const { addonBuilder } = require('stremio-addon-sdk');
 // const _ = require('lodash');
 const logger = require('./logger.js');
-const magnet = require('magnet-uri');
-const { rarbg } = require('rarbg-api-ts');
-const webtorrentHealth = require('webtorrent-health');
-
-const package_manifest = require('../package.json');
+// const magnet = require('magnet-uri');
+// const { rarbg } = require('rarbg-api-ts');
+// const webtorrentHealth = require('webtorrent-health');
+const { isNumeric } = require('./config');
 const fetch = require('node-fetch');
-
 const { getManifest } = require('./manifest');
 const {
   getGenreList,
@@ -419,6 +417,11 @@ const robots = {
               // console.log(`iterator->_getCatalog (${page}):`, _getCatalog);
 
               getMetas = _getCatalog.metas;
+
+              console.log(
+                `iterator->_getCatalog->page(${page})->length(${getMetas.length})`
+              );
+
               // getMetas = getMetas.slice(0, 2);
               // console.log(
               //   `iterator->_getCatalog->getMetas (${page}):`,
@@ -440,7 +443,7 @@ const robots = {
             }
             var array_range = range(page, page + 1);
             console.log(
-              `tmdb->addon->array_range (${array_range.length}): `,
+              `tmdb->addon->array_range->length(${array_range.length}): `,
               array_range
             );
             const promises = array_range.map(async (val, idx) =>
@@ -449,7 +452,10 @@ const robots = {
             await Promise.all(promises);
             //
 
-            console.log(`tmdb->addon->metas (${metas.length}): `, 'metas');
+            console.log(
+              `tmdb->addon->metas->length(${metas.length}): `,
+              'metas'
+            );
           })().catch((err) => {
             console.error(err);
           });
@@ -474,19 +480,23 @@ const robots = {
 
               if (args.extra && args.extra.genre) {
                 const genre = args.extra.genre;
-                // @TODO skip
-                var url = `https://v3-cinemeta.strem.io/catalog/${type}/${id_catalog}/genre=${genre}.json`;
-                console.log(`cinemeta->iterator->url (${skip}):`, url);
+                var url = `https://v3-cinemeta.strem.io/catalog/${type}/${id_catalog}/genre=${genre}&skip=${skip}.json`;
+                console.log(`cinemeta->iterator->url->skip(${skip}):`, url);
                 var _getCatalog = await fetch(url).then((res) => res.json());
               } else {
                 var url = `https://v3-cinemeta.strem.io/catalog/${type}/${id_catalog}/skip=${skip}.json`;
-                console.log(`cinemeta->iterator->url (${skip}):`, url);
+                console.log(`cinemeta->iterator->url->skip(${skip}):`, url);
                 var _getCatalog = await fetch(url).then((res) => res.json());
                 // .then((json) => console.log(json));
               }
               // console.log(`iterator->_getCatalog (${skip}):`, _getCatalog);
 
               getMetas = _getCatalog.metas;
+
+              console.log(
+                `iterator->_getCatalog->skip(${skip})->length(${getMetas.length})`
+              );
+
               // getMetas = getMetas.slice(0, 2);
               // console.log(
               //   `iterator->_getCatalog->getMetas (${skip}):`,
@@ -496,30 +506,49 @@ const robots = {
               metas = metas.concat(getMetas);
 
               console.log(
-                `cinemeta->iterator->_getCatalog->metas (${skip}):`,
+                `cinemeta->iterator->_getCatalog->metas->skip(${skip}):`,
                 'metas'
               );
             }
 
-            function range(start, end) {
+            function range(start, end, multiple) {
               return Array(end - start + 1)
                 .fill()
-                .map((_, idx) => start + idx * 100);
+                .map((_, idx) => start + idx * multiple);
             }
+
             var start_range = skip;
             var end_range = skip + 4;
-            var array_range = range(start_range, end_range);
+            var multiple = 100;
+
+            // if (args.extra.genre && isNumeric(args.extra.genre)) {
+            //   var end_range = skip + 2;
+            //   var multiple = 600;
+            // }
+
+            var array_range = range(start_range, end_range, multiple);
+
+            if (args.extra.genre && isNumeric(args.extra.genre)) {
+              var array_range = (args.extra || {}).skip
+                ? [skip, Math.round(args.extra.skip) * 2]
+                : [0];
+            }
+
             console.log(
-              `cinemeta->addon->array_range (${start_range}) (${end_range}) (${array_range.length}): `,
+              `cinemeta->addon->array_range->(${start_range} - ${end_range})->length(${array_range.length}): `,
               array_range
             );
+
             const promises = array_range.map(async (val, idx) =>
               iterator(val, idx)
             );
             await Promise.all(promises);
             //
 
-            console.log(`cinemeta->addon->metas (${metas.length}): `, 'metas');
+            console.log(
+              `cinemeta->addon->metas->length(${metas.length}): `,
+              'metas'
+            );
           })();
 
           break;

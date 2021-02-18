@@ -4,9 +4,7 @@ const { MovieDb } = require('moviedb-promise');
 const moviedb = new MovieDb(process.env.APP_TMDB_API);
 const TMDB_API_LANGUAGE = 'pt-BR';
 
-function isNumeric(value) {
-  return /^\d+$/.test(value);
-}
+const { isNumeric } = require('./config');
 
 async function getGenreList(type) {
   if (type === 'movie') {

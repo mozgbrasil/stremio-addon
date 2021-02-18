@@ -8,19 +8,10 @@ const {
   getGenreTvList,
   getGenreMovieList,
 } = require('./moviedb');
+const fetch = require('node-fetch');
 
 async function getManifest() {
   // https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/manifest.md#basic-information
-
-  const genreMovieList = await getGenreMovieList;
-  const genres_movie = genreMovieList.map((el) => {
-    return el.name;
-  });
-
-  const genreTvList = await getGenreTvList;
-  const genres_series = genreTvList.map((el) => {
-    return el.name;
-  });
 
   function generateArrayOfYears() {
     var max = new Date().getFullYear();
@@ -50,115 +41,136 @@ async function getManifest() {
     arrayIMDB[random] +
     '/img';
 
-  const catalogs_cinemeta = [
-    {
-      type: 'movie',
-      id: 'movie.top.cinemeta',
-      extraSupported: ['search', 'genre', 'skip'],
-      genres: genres_movie,
-      name: 'Top -️️ CINEMETA',
-    },
-    {
-      type: 'series',
-      id: 'series.top.cinemeta',
-      extraSupported: ['search', 'genre', 'skip'],
-      genres: genres_series,
-      name: 'Top -️️ CINEMETA',
-    },
-    {
-      type: 'movie',
-      id: 'movie.year.cinemeta',
-      genres: years_movie,
-      extra: [
-        {
-          name: 'genre',
-          options: years_movie,
-          isRequired: true,
-        },
-      ],
-      extraSupported: ['genre'],
-      extraRequired: ['genre'],
-      name: 'By year -️ CINEMETA️',
-    },
-    {
-      type: 'series',
-      id: 'series.year.cinemeta',
-      genres: years_movie,
-      extra: [
-        {
-          name: 'genre',
-          options: years_movie,
-          isRequired: true,
-        },
-      ],
-      extraSupported: ['genre'],
-      extraRequired: ['genre'],
-      name: 'By year -️️ CINEMETA',
-    },
-  ];
-
-  const catalogs_tmdb = [
-    {
-      type: 'movie',
-      id: 'movie.top.tmdb',
-      extraSupported: ['search', 'genre', 'skip'],
-      genres: genres_movie,
-      name: 'Top -️️ TMDB',
-    },
-    {
-      type: 'series',
-      id: 'series.top.tmdb',
-      extraSupported: ['search', 'genre', 'skip'],
-      genres: genres_series,
-      name: 'Top -️️ TMDB',
-    },
-    {
-      type: 'movie',
-      id: 'movie.year.tmdb',
-      genres: years_movie,
-      extra: [
-        {
-          name: 'genre',
-          options: years_movie,
-          isRequired: true,
-        },
-      ],
-      extraSupported: ['genre'],
-      extraRequired: ['genre'],
-      name: 'By year -️ TMDB️',
-    },
-    {
-      type: 'series',
-      id: 'series.year.tmdb',
-      genres: years_movie,
-      extra: [
-        {
-          name: 'genre',
-          options: years_movie,
-          isRequired: true,
-        },
-      ],
-      extraSupported: ['genre'],
-      extraRequired: ['genre'],
-      name: 'By year -️ TMDB',
-    },
-  ];
-
-  const varName = 'catalogs_' + process.env.APP_CATALOG;
-  const catalogs = eval(varName);
-
   switch (process.env.APP_CATALOG) {
     case 'tmdb':
-      var descriptionCatalog =
+      // (async function () {
+      // Self-Invoking Functions
+
+      var genres_movie = await getGenreMovieList.map((el) => {
+        return el.name;
+      });
+      var genres_series = await getGenreTvList.map((el) => {
+        return el.name;
+      });
+
+      var description =
         '(' +
         process.env.APP_CATALOG.toUpperCase() +
         ') displays 40 records instead of 20 records';
+
+      var catalogs = [
+        {
+          type: 'movie',
+          id: 'movie.top.tmdb',
+          extraSupported: ['search', 'genre', 'skip'],
+          genres: genres_movie,
+          name: 'Top -️️ TMDB',
+        },
+        {
+          type: 'series',
+          id: 'series.top.tmdb',
+          extraSupported: ['search', 'genre', 'skip'],
+          genres: genres_series,
+          name: 'Top -️️ TMDB',
+        },
+        {
+          type: 'movie',
+          id: 'movie.year.tmdb',
+          genres: years_movie,
+          extra: [
+            {
+              name: 'genre',
+              options: years_movie,
+              isRequired: true,
+            },
+          ],
+          extraSupported: ['genre'],
+          extraRequired: ['genre'],
+          name: 'By year -️ TMDB️',
+        },
+        {
+          type: 'series',
+          id: 'series.year.tmdb',
+          genres: years_movie,
+          extra: [
+            {
+              name: 'genre',
+              options: years_movie,
+              isRequired: true,
+            },
+          ],
+          extraSupported: ['genre'],
+          extraRequired: ['genre'],
+          name: 'By year -️ TMDB',
+        },
+      ];
+      // })();
+
       break;
     case 'cinemeta':
-      var descriptionCatalog =
+      // (async function () {
+      // Self-Invoking Functions
+
+      var url = `https://v3-cinemeta.strem.io/manifest.json`;
+      const getManifest = await fetch(url).then((res) => res.json());
+      // console.log('getManifest: ', getManifest);
+      var genres_movie = getManifest.catalogs[0].genres;
+      // console.log('genres_movie: ', genres_movie);
+      var genres_series = getManifest.catalogs[1].genres;
+
+      var description =
         '(' +
         process.env.APP_CATALOG.toUpperCase() +
         ') displays 500 records instead of 100 records';
+
+      var catalogs = [
+        {
+          type: 'movie',
+          id: 'movie.top.cinemeta',
+          extraSupported: ['search', 'genre', 'skip'],
+          genres: genres_movie,
+          name: 'Top -️️ CINEMETA',
+        },
+        {
+          type: 'series',
+          id: 'series.top.cinemeta',
+          extraSupported: ['search', 'genre', 'skip'],
+          genres: genres_series,
+          name: 'Top -️️ CINEMETA',
+        },
+        {
+          type: 'movie',
+          id: 'movie.year.cinemeta',
+          genres: years_movie,
+          extra: [
+            {
+              name: 'genre',
+              options: years_movie,
+              isRequired: true,
+            },
+          ],
+          extraSupported: ['genre'],
+          extraRequired: ['genre'],
+          name: 'By year -️ CINEMETA️',
+        },
+        {
+          type: 'series',
+          id: 'series.year.cinemeta',
+          genres: years_movie,
+          extra: [
+            {
+              name: 'genre',
+              options: years_movie,
+              isRequired: true,
+            },
+          ],
+          extraSupported: ['genre'],
+          extraRequired: ['genre'],
+          name: 'By year -️️ CINEMETA',
+        },
+      ];
+      // })();
+
       break;
     default:
       console.log('Default case');
@@ -167,8 +179,7 @@ async function getManifest() {
 
   const id = 'community.mozg.' + process.env.APP_CATALOG;
   const name = '' + process.env.APP_CATALOG + ' Extend';
-  var description =
-    '' + sprintf(package_manifest.description, descriptionCatalog);
+  var description = '' + sprintf(package_manifest.description, description);
 
   return {
     id: id,
