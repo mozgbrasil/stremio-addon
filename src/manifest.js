@@ -46,10 +46,13 @@ async function getManifest() {
       // (async function () {
       // Self-Invoking Functions
 
-      var genres_movie = await getGenreMovieList.map((el) => {
+      const genreMovieList = await getGenreMovieList;
+      var genres_movie = genreMovieList.map((el) => {
         return el.name;
       });
-      var genres_series = await getGenreTvList.map((el) => {
+
+      const genreTvList = await getGenreTvList;
+      var genres_series = genreTvList.map((el) => {
         return el.name;
       });
 
