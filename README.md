@@ -10,15 +10,18 @@
 
 [Extension](https://stremio-dhins.herokuapp.com/) to [Stremio][url-stremio] The next generation media center
 
+This extension is competing in the competition [<Stremio Addon TITANS 2020/>](https://www.stremio.com/competition)
+
 The following extensions have been published
 
-[https://stremio-addon-tmdb.herokuapp.com/](https://stremio-addon-tmdb.herokuapp.com/)
+~~[https://stremio-addon-tmdb.herokuapp.com/](https://stremio-addon-tmdb.herokuapp.com/)~~
 
-This extension was created due to the need to display more years in the filter per year, (TMDB) displays 40 records instead of 20 records
+~~This extension was created due to the need to display more years in the filter per year, the native Stremio extension allows you to filter only the last 15 years, I applied support that allows you to filter up to the last 150 years, (TMDB) displays 40 records instead of 20 records~~
 
-[https://stremio-addon-cinemeta.herokuapp.com/](https://stremio-addon-cinemeta.herokuapp.com/)
+[https://9b7c457c25d2-stremio-addon.baby-beamup.club/](https://9b7c457c25d2-stremio-addon.baby-beamup.club/)
+~~[https://stremio-addon-cinemeta.herokuapp.com/](https://stremio-addon-cinemeta.herokuapp.com/)~~
 
-This extension was created due to the need to display more years in the filter per year, (CINEMETA) displays 500 records instead of 100 records
+This extension was created due to the need to display more years in the filter per year, the native Stremio extension allows you to filter only the last 15 years, I applied support that allows you to filter up to the last 150 years, (CINEMETA) displays 500 records instead of 100 records
 
 ## Motivation
 

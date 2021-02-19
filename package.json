@@ -1,7 +1,7 @@
 {
   "name": "@mozg/stremio-addon",
   "version": "1.0.11",
-  "description": "This extension was created due to the need to display more years in the filter per year, %s",
+  "description": "This extension was created due to the need to display more years in the filter per year, the native Stremio extension allows you to filter only the last 15 years, I applied support that allows you to filter up to the last 150 years, %s",
   "author": "USR <mozgbrasil@gmail.com>",
   "homepage": "https://github.com/mozgbrasil/stremio-addon",
   "license": "ISC",
