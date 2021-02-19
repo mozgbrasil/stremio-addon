@@ -530,7 +530,7 @@ const robots = {
 
             if (args.extra.genre && isNumeric(args.extra.genre)) {
               var array_range = (args.extra || {}).skip
-                ? [skip, Math.round(args.extra.skip) * 2]
+                ? [skip, Math.round(args.extra.skip) + 600]
                 : [0];
             }
 
