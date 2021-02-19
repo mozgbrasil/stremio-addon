@@ -10,7 +10,7 @@ before_script:
   - 'echo -e "@before_script"'
 script:
   - 'echo -e "@script"'
-  - codecov # upload coverage reports to codecov.io
+  - codecov --disable=gcov # upload coverage reports to codecov.io
 after_success:
   - 'echo -e "@after_success"'
 after_script:
