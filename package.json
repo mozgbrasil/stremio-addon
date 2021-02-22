@@ -23,7 +23,7 @@
     "moviedb-promise": "3.1.6",
     "rarbg-api-ts": "1.0.22",
     "sprintf-js": "1.1.2",
-    "stremio-addon-sdk": "1.6.4",
+    "stremio-addon-sdk": "1.6.5",
     "webtorrent-health": "1.1.2"
   },
   "devDependencies": {}
