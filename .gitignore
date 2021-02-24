@@ -120,3 +120,5 @@ dist
 #
 README.dev.md
 shell.sh
+# Local Netlify folder
+.netlify

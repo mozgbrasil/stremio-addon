@@ -4,3 +4,6 @@
 #   status:
 #     project: off
 #     patch: off
+# https://docs.codecov.io/docs/fixing-paths
+codecov:
+  disable_default_path_fixes: false

@@ -41,7 +41,12 @@ async function getManifest() {
     arrayIMDB[random] +
     '/img';
 
-  switch (process.env.APP_CATALOG) {
+  var extension_id = process.env.APP_ID.split('.');
+  extension_id = extension_id[2];
+
+  // console.log('extension_id: ', extension_id);
+
+  switch (extension_id) {
     case 'tmdb':
       // (async function () {
       // Self-Invoking Functions
@@ -58,7 +63,7 @@ async function getManifest() {
 
       var description =
         '(' +
-        process.env.APP_CATALOG.toUpperCase() +
+        extension_id.toUpperCase() +
         ') displays 40 records instead of 20 records';
 
       var catalogs = [
@@ -123,7 +128,7 @@ async function getManifest() {
 
       var description =
         '(' +
-        process.env.APP_CATALOG.toUpperCase() +
+        extension_id.toUpperCase() +
         ') displays 500 records instead of 100 records';
 
       var catalogs = [
@@ -180,8 +185,8 @@ async function getManifest() {
       break;
   }
 
-  const id = 'community.mozg.' + process.env.APP_CATALOG;
-  const name = '' + process.env.APP_CATALOG + ' Extend';
+  const id = process.env.APP_ID;
+  const name = '' + extension_id + ' Extend';
   var description = '' + sprintf(package_manifest.description, description);
 
   return {

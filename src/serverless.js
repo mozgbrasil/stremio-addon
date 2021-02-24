@@ -1,12 +1,9 @@
 const { getRouter } = require('stremio-addon-sdk');
 const addonInterface = require('./addon');
-const logger = require('./logger.js');
-const sentry = require('./sentry');
-const { config } = require('./config');
-const package_manifest = require('../package.json');
+const { getSentry } = require('./base');
 const { getManifest } = require('./manifest');
 
-//
+getSentry();
 
 const router = getRouter({ ...addonInterface, manifest: getManifest() });
 

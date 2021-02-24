@@ -1,10 +1,9 @@
 const { addonBuilder } = require('stremio-addon-sdk');
 // const _ = require('lodash');
-const logger = require('./logger.js');
 // const magnet = require('magnet-uri');
 // const { rarbg } = require('rarbg-api-ts');
 // const webtorrentHealth = require('webtorrent-health');
-const { isNumeric } = require('./config');
+const { isNumeric, getLogzio } = require('./base');
 const fetch = require('node-fetch');
 const { getManifest } = require('./manifest');
 const {
@@ -79,7 +78,7 @@ const robots = {
 
     // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineStreamHandler.md
     // builder.defineStreamHandler(async function (args) {
-    //   logger.info(
+    //   getLogzio().info(
     //     'defineStreamHandler | ' + '' + JSON.stringify(args) + '',
     //     'STREAM',
     //     args.id
@@ -347,7 +346,7 @@ const robots = {
 
     // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineMetaHandler.md
     // builder.defineMetaHandler(function (args) {
-    //   logger.info(
+    //   getLogzio().info(
     //     'defineMetaHandler | ' + '' + JSON.stringify(args) + '',
     //     'META',
     //     args.id
@@ -364,7 +363,7 @@ const robots = {
 
     // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineCatalogHandler.md
     builder.defineCatalogHandler(async function (args) {
-      logger.info(
+      getLogzio().info(
         'defineCatalogHandler | ' + '' + JSON.stringify(args) + '',
         'CATALOG',
         args.id
@@ -562,7 +561,7 @@ const robots = {
 
     // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineSubtitlesHandler.md
     // builder.defineSubtitlesHandler(function (args) {
-    //   logger.info(
+    //   getLogzio().info(
     //     'defineMetaHandler | ' + '' + JSON.stringify(args) + '',
     //     'SUBTITLE',
     //     args.id

@@ -1,6 +1,6 @@
 {
   "name": "@mozg/stremio-addon",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "This extension was created due to the need to display more years in the filter per year, the native Stremio extension allows you to filter only the last 15 years, I applied support that allows you to filter up to the last 150 years, %s",
   "author": "USR <mozgbrasil@gmail.com>",
   "homepage": "https://github.com/mozgbrasil/stremio-addon",
@@ -9,7 +9,11 @@
   "scripts": {
     "start": "node src/server.js",
     "dev-addon": "nodemon -x 'clear;node' -r dotenv/config src/server.js",
-    "dev-addon-launch": "nodemon -x 'clear;node' -r dotenv/config src/server.js --launch"
+    "dev-addon-launch": "nodemon -x 'clear;node' -r dotenv/config src/server.js --launch",
+    "build": "echo 'deploy build' ",
+    "netlify:help": "netlify --help",
+    "netlify:login": "netlify login",
+    "netlify:deploy": "netlify deploy"
   },
   "dependencies": {
     "@sentry/browser": "6.2.0",
@@ -22,6 +26,7 @@
     "magnet-uri": "6.1.0",
     "moviedb-promise": "3.1.6",
     "rarbg-api-ts": "1.0.22",
+    "rollbar": "2.21.0",
     "sprintf-js": "1.1.2",
     "stremio-addon-sdk": "1.6.4",
     "webtorrent-health": "1.1.2"
