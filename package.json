@@ -20,7 +20,7 @@
     "@sentry/node": "6.2.0",
     "@sentry/tracing": "6.2.0",
     "dotenv": "8.2.0",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "log4js": "6.3.0",
     "logzio-nodejs": "2.0.2",
     "magnet-uri": "6.1.0",
