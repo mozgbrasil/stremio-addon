@@ -16,9 +16,9 @@
     "netlify:deploy": "netlify deploy"
   },
   "dependencies": {
-    "@sentry/browser": "6.2.0",
-    "@sentry/node": "6.2.0",
-    "@sentry/tracing": "6.2.0",
+    "@sentry/browser": "6.3.6",
+    "@sentry/node": "6.3.6",
+    "@sentry/tracing": "6.3.6",
     "dotenv": "8.2.0",
     "lodash": "4.17.20",
     "log4js": "6.3.0",
