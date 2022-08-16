@@ -1,4 +1,4 @@
-[checkmark]: https://raw.githubusercontent.com/mozgbrasil/mozgbrasil.github.io/master/assets/images/logos/logo_32_32.png 'MOZG'
+[checkmark]: https://raw.githubusercontent.com/mozgbrasil/mozgbrasil.github.io/master/assets/images/logos/logo_32_32.png "MOZG"
 
 ![valid XHTML][checkmark]
 
@@ -26,6 +26,29 @@ This extension was created due to the need to display more years in the filter p
 ## Motivation
 
 Disseminate the platform [Stremio](https://www.stremio.com/)
+
+## Contribute
+
+```bash
+git clone https://github.com/mozgbrasil/stremio-addon.git
+cd stremio-addon && npm install && npm run start
+```
+
+### Deploy
+
+```bash
+# https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/deploying/beamup.md
+
+beamup --help
+
+cat /home/codespace/beamup-config.json
+
+beamup deploy
+
+beamup logs
+
+
+```
 
 ## Badges
 

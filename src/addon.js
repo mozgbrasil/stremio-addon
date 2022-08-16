@@ -20,31 +20,21 @@ var builder;
 
 //
 
-const robots = {
-  init: async function robot() {
-    console.log('robot->init');
-    // let obj = {
-    //   // window: window,
-    //   global: global,
-    //   // this: this,
-    // };
-    // for (var [key, value] of Object.entries(obj)) {
-    //   let label = key;
-    //   console.log(
-    //     `getOwnPropertyNames ${label}: `,
-    //     Object.getOwnPropertyNames(value).sort()
-    //   );
-    //   console.log(
-    //     `getOwnPropertySymbols ${label}: `,
-    //     Object.getOwnPropertySymbols(value).sort()
-    //   );
-    // }
+var debugData = [];
+var mozg = mozg || {};
+mozg.stremio = {
+  objects: {},
+  init: async function () {
+    debugData.push(arguments.callee.name);
+    console.log('mozg.stremio.init', arguments.callee.name);
   },
-  sentry: async function robot() {
-    console.log('robot->sentry');
+  sentry: async function () {
+    debugData.push(arguments.callee.name);
+    console.log('mozg.stremio.sentry');
   },
-  builder: async function robot() {
-    console.log('robot->builder');
+  builder: async function () {
+    debugData.push(arguments.callee.name);
+    console.log('mozg.stremio.builder');
 
     // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/manifest.md
 
@@ -54,320 +44,14 @@ const robots = {
 
     builder = new addonBuilder(manifest);
 
-    // console.log('builder: ', builder);
-
-    // builder.defineResourceHandler('stream', function(args) {
-    //   return Promise.resolve({
-    //       addons: [
-    //           {
-    //               transportName: 'http',
-    //               transportUrl: 'https://example.addon.org/manifest.json',
-    //               manifest: {
-    //                   id: 'org.myexampleaddon',
-    //                   version: '1.0.0',
-    //                   name: 'simple example',
-    //                   catalogs: [],
-    //                   resources: ['stream'],
-    //                   types: ['movie'],
-    //                   idPrefixes: ['tt']
-    //               }
-    //           }
-    //       ]
-    //   })
-    // })
-
-    // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineStreamHandler.md
-    // builder.defineStreamHandler(async function (args) {
-    //   getLogzio().info(
-    //     'defineStreamHandler | ' + '' + JSON.stringify(args) + '',
-    //     'STREAM',
-    //     args.id
-    //   );
-
-    //   //
-
-    //   var streams = [];
-
-    //   const robots = {
-    //     streamHandler: async function () {
-    //       console.log('robot->streamHandler: ', args);
-    //     },
-    //     rarbg: async function () {
-    //       console.log('robot->rarbgt: ', args);
-
-    //       // https://www.npmjs.com/package/rarbg-api-ts
-
-    //       // const findMovie = async (title) => {
-
-    //       //
-
-    //       // let stream = {
-    //       //   name: 'rarbg-api-ts',
-    //       //   title: `💾 test`,
-    //       //   type: args.type,
-    //       //   infoHash: 'false',
-    //       // };
-
-    //       // streams.push(stream);
-    //       // return streams;
-
-    //       //
-    //     },
-    //   };
-
-    //   //
-
-    //   async function promise_streamHandler() {
-    //     // return new Promise((resolve) => {
-    //     //   (async function () {
-    //     // Self-Invoking Functions
-    //     console.log('promise_streamHandler: ', args);
-
-    //     return await robots.streamHandler();
-    //     //   })();
-    //     //   setTimeout(() => {
-    //     //     resolve('promise_streamHandler');
-    //     //   }, 500);
-    //     // });
-    //   }
-
-    //   async function promise_rarbg() {
-    //     // return new Promise((resolve) => {
-    //     //   (async function () {
-    //     // Self-Invoking Functions
-    //     console.log('promise_rarbg: ', args);
-    //     try {
-    //       return await robots.rarbg();
-    //     } catch (e) {
-    //       console.log('catch: ', e);
-    //       let stream = {
-    //         name: 'rarbg-api-ts',
-    //         title: `🔴️ ${e}`,
-    //         type: args.type,
-    //         url:
-    //           'http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4',
-    //       };
-    //       streams.push(stream);
-    //       return streams;
-    //     }
-    //     //   })();
-    //     //   setTimeout(() => {
-    //     //     resolve('promise_rarbg');
-    //     //   }, 500);
-    //     // });
-    //   }
-
-    //   async function promise_searchImdb() {
-    //     // return new Promise((resolve) => {
-    //     //   (function () {
-    //     // Self-Invoking Functions
-    //     console.log('promise_searchImdb: ', args);
-    //     return await rarbg
-    //       .searchImdb(args.id)
-    //       .then((res) => {
-    //         console.log('searchImdb->res: ', 'res');
-
-    //         function iterate(obj) {
-    //           // console.log('obj: ', obj);
-    //           let uri = obj.download;
-    //           var parsed = magnet.decode(uri);
-
-    //           var title = parsed.dn;
-    //           var infoHash = parsed.infoHash;
-    //           var titleUpper = title.toUpperCase();
-
-    //           var tags = '';
-    //           if (titleUpper.match(/720P/i)) tags = tags + '720p ';
-    //           if (titleUpper.match(/1080P/i)) tags = tags + '1080p ';
-    //           if (titleUpper.match(/LEGENDADO/i)) tags = tags + 'LEGENDADO ';
-    //           if (titleUpper.match(/DUBLADO/i)) tags = tags + 'DUBLADO ';
-    //           if (titleUpper.match(/DUBLADA/i)) tags = tags + 'DUBLADA ';
-    //           if (titleUpper.match(/DUAL/i)) tags = tags + 'DUAL ÁUDIO ';
-    //           if (titleUpper.match(/4K/i)) tags = tags + '4K ';
-    //           if (titleUpper.match(/2160P/i)) tags = tags + '2160p ';
-    //           if (titleUpper.match(/UHD/i)) tags = tags + 'UHD ';
-
-    //           let stream = {
-    //             name: '⭐ rarbg',
-    //             title: `🎥 ${title}`,
-    //             type: args.type,
-    //             infoHash: infoHash,
-    //             _magnet: uri,
-    //             _sources: (parsed.announce || [])
-    //               .map(function (x) {
-    //                 return 'tracker:' + x;
-    //               })
-    //               .concat(['dht:' + infoHash]),
-    //             _tag: tags,
-    //           };
-
-    //           console.log('searchImdb->res->iterate: ', 'stream');
-
-    //           streams.push(stream);
-    //         }
-
-    //         // res.forEach(async function (obj) {
-    //         // });
-    //         for (var i = 0; i < res.length; i++) {
-    //           iterate(res[i]);
-    //         }
-
-    //         console.log('robot->searchImdb->res->Promise: ', 'streams');
-    //         return streams;
-    //         // return await Promise.resolve({ streams: streams });
-    //       })
-    //       .catch(console.error.bind(console));
-
-    //     // console.log('promise_searchImdb->streams: ', streams);
-    //     // return Promise.resolve({ streams: streams });
-
-    //     //   })();
-    //     //   setTimeout(() => {
-    //     //     resolve('promise_searchImdb');
-    //     //   }, 500);
-    //     // });
-    //   }
-
-    //   async function promise_webtorrentHealth() {
-    //     // return new Promise((resolve) => {
-    //     //   (async function () {
-    //     // Self-Invoking Functions
-    //     console.log('promise_webtorrentHealth: ', args);
-
-    //     //
-
-    //     // https://oieduardorabelo.medium.com/javascript-armadilhas-do-asyn-await-em-loops-1cdad44db7f0
-
-    //     // (async function () {
-    //     // Self-Invoking Functions
-
-    //     async function iterator(val, idx) {
-    //       if (!val._magnet) {
-    //         return;
-    //         // continue;
-    //       }
-
-    //       var stream = val;
-
-    //       console.log(`stream[${idx}]:`, 'stream');
-
-    //       var magnet = stream._magnet;
-
-    //       // var todo = 'todo';
-
-    //       // https://www.npmjs.com/package/webtorrent-health
-    //       var todo = new Promise((resolve, reject) => {
-    //         webtorrentHealth(magnet, function (err, data) {
-    //           if (err) return console.error(err);
-    //           // console.log('webtorrentHealth->data: ', data);
-    //           resolve(data);
-    //         });
-    //       });
-
-    //       var data = await todo;
-
-    //       console.log(`Received Todo ${idx + 1}:`, 'data');
-
-    //       streams[idx].title = `${streams[idx].title} \n 🌱 seeders: ${
-    //         data.seeds
-    //       } 🌵 leechers: ${data.peers} ⭐ ratio: ${Math.round(
-    //         data.peers > 0 ? data.seeds / data.peers : data.seeds
-    //       )} \n ${streams[idx]._tag}`;
-
-    //       // console.log(`Received Todo ${idx + 1}:`, todo);
-    //     }
-
-    //     // sincrona
-    //     // for (const [idx, val] of streams.entries()) {
-    //     //   iterator(val, idx);
-    //     // }
-
-    //     // assincrona
-    //     const promises = streams.map(async (val, idx) => iterator(val, idx));
-    //     await Promise.all(promises);
-
-    //     //
-
-    //     console.log('Finished!');
-    //     // })();
-
-    //     //
-
-    //     // console.log('promise_webtorrentHealth->update->streams: ', streams);
-
-    //     // return await streams;
-    //     //   })();
-    //     //   setTimeout(() => {
-    //     //     resolve('promise_webtorrentHealth');
-    //     //   }, 500);
-    //     // });
-    //   }
-
-    //   //
-
-    //   return new Promise((resolve, reject) => {
-    //     //
-
-    //     (async function () {
-    //       // Self-Invoking Functions
-
-    //       promise_streamHandler()
-    //         .then(async (res) => {
-    //           console.log('res_1_promise_streamHandler: ', 'res');
-    //           await promise_rarbg()
-    //             .then(async (res) => {
-    //               console.log('res_2_promise_rarbg: ', 'res');
-    //               await promise_searchImdb()
-    //                 .then(async (res) => {
-    //                   console.log('res_3_promise_searchImdb: ', 'res');
-    //                   await promise_webtorrentHealth()
-    //                     .then((res) => {
-    //                       console.log(
-    //                         'res_4_promise_webtorrentHealth: ',
-    //                         'res'
-    //                       );
-    //                       // console.log('resolve:', streams);
-    //                       resolve({
-    //                         streams: streams,
-    //                       });
-    //                     })
-    //                     .catch(console.error.bind(console));
-    //                 })
-    //                 .catch(console.error.bind(console));
-    //             })
-    //             .catch(console.error.bind(console));
-    //         })
-    //         .catch(console.error.bind(console));
-    //     })();
-
-    //     //
-    //   });
-    // });
-
-    // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineMetaHandler.md
-    // builder.defineMetaHandler(function (args) {
-    //   getLogzio().info(
-    //     'defineMetaHandler | ' + '' + JSON.stringify(args) + '',
-    //     'META',
-    //     args.id
-    //   );
-
-    //   if (args.id !== '') {
-    //     // serve one stream movie
-    //     return Promise.resolve({ meta: [] });
-    //   }
-
-    //   // otherwise return no streams
-    //   return Promise.resolve({ meta: [] });
-    // });
-
     // Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineCatalogHandler.md
+
     builder.defineCatalogHandler(async function (args) {
-      getLogzio().info(
-        'defineCatalogHandler | ' + '' + JSON.stringify(args) + '',
-        'CATALOG',
-        args.id
-      );
+      (message = 'defineCatalogHandler | ' + '' + JSON.stringify(args) + ''),
+        'CATALOG';
+      optionalParams = args.id;
+      getLogzio().info(message, optionalParams);
+      console.log(message, optionalParams);
 
       let type = args.type;
 
@@ -493,7 +177,7 @@ const robots = {
               getMetas = _getCatalog.metas;
 
               console.log(
-                `iterator->_getCatalog->skip(${skip})->length(${getMetas.length})`
+                `cinemeta->iterator->_getCatalog->skip(${skip})->length(${getMetas.length})`
               );
 
               // getMetas = getMetas.slice(0, 2);
@@ -520,6 +204,10 @@ const robots = {
             var end_range = skip + 4;
             var multiple = 100;
 
+            var mozgObjects = mozg.stremio.objects;
+            mozgObjects.start_range = start_range;
+            debugData.push(mozgObjects);
+
             // if (args.extra.genre && isNumeric(args.extra.genre)) {
             //   var end_range = skip + 2;
             //   var multiple = 600;
@@ -527,19 +215,19 @@ const robots = {
 
             var array_range = range(start_range, end_range, multiple);
 
-            if (args.extra.genre && isNumeric(args.extra.genre)) {
-              var array_range = (args.extra || {}).skip
-                ? [skip, Math.round(args.extra.skip) + 600]
-                : [0];
-            }
+            // if (args.extra.genre && isNumeric(args.extra.genre)) {
+            //   var array_range = (args.extra || {}).skip
+            //     ? [skip, Math.round(args.extra.skip) + 600]
+            //     : [0];
+            // }
 
             console.log(
               `cinemeta->addon->array_range->(${start_range} - ${end_range})->length(${array_range.length}): `,
               array_range
             );
 
-            const promises = array_range.map(async (val, idx) =>
-              iterator(val, idx)
+            const promises = array_range.map(
+              async (val, idx) => await iterator(val, idx)
             );
             await Promise.all(promises);
             //
@@ -573,19 +261,19 @@ const robots = {
     // module.exports = builder.getInterface();
     //
   },
+  run: async function () {
+    debugData.push(arguments.callee.name);
+    console.log('mozg.stremio.run');
+    mozg.stremio.init();
+    await mozg.stremio.sentry();
+    await mozg.stremio.builder();
+    // await console.log('builder: ', builder);
+    return builder.getInterface();
+  },
 };
 
 //
 
-async function start() {
-  console.log('addon-start');
-  robots.init();
-  await robots.sentry();
-  await robots.builder();
-  // await console.log('builder: ', builder);
-  return builder.getInterface();
-}
-
 module.exports = async () => {
-  return start();
+  return mozg.stremio.run();
 };

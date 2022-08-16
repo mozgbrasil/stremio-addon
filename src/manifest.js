@@ -41,6 +41,8 @@ async function getManifest() {
     arrayIMDB[random] +
     '/img';
 
+  console.log('process.env.APP_ID: ', process.env.APP_ID);
+
   var extension_id = process.env.APP_ID.split('.');
   extension_id = extension_id[2];
 
@@ -137,14 +139,14 @@ async function getManifest() {
           id: 'movie.top.cinemeta',
           extraSupported: ['search', 'genre', 'skip'],
           genres: genres_movie,
-          name: 'Top -️️ CINEMETA',
+          name: '😻️ Top -️️ CINEMETA',
         },
         {
           type: 'series',
           id: 'series.top.cinemeta',
           extraSupported: ['search', 'genre', 'skip'],
           genres: genres_series,
-          name: 'Top -️️ CINEMETA',
+          name: '😻️ Top -️️ CINEMETA',
         },
         {
           type: 'movie',
@@ -159,7 +161,7 @@ async function getManifest() {
           ],
           extraSupported: ['genre'],
           extraRequired: ['genre'],
-          name: 'By year -️ CINEMETA️',
+          name: '😻️ By year -️ CINEMETA️',
         },
         {
           type: 'series',
@@ -174,7 +176,7 @@ async function getManifest() {
           ],
           extraSupported: ['genre'],
           extraRequired: ['genre'],
-          name: 'By year -️️ CINEMETA',
+          name: '😻️ By year -️️ CINEMETA',
         },
       ];
       // })();
@@ -204,8 +206,7 @@ async function getManifest() {
     idPrefixes: [''],
     catalogs: catalogs,
     background: background,
-    logo:
-      'https://s.gravatar.com/avatar/38385ec9b5375a77513a4dad6aebca08?s=256',
+    logo: 'https://s.gravatar.com/avatar/38385ec9b5375a77513a4dad6aebca08?s=256',
   };
 }
 
